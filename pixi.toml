@@ -16,4 +16,4 @@ configure = "cmake -B build -DCMAKE_BUILD_TYPE=Release"
 build = { cmd = "cmake --build build --config Release", depends-on = ["configure"]}
 test = { cmd = "ctest --test-dir build -C Release", depends-on = ["build"] }
 
-py-test = 'python -c "import subprocess; subprocess.run([\"build/cppcon\"])"'
+this = "python -c 'import this'"

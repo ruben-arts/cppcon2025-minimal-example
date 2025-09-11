@@ -20,19 +20,18 @@ jobs:
         if: runner.os == 'Linux'
         run: |
           sudo apt-get update
-          sudo apt-get install -y build-essential cmake libboost-all-dev
+          sudo apt-get install -y build-essential libboost-all-dev
 
       - name: Install deps (macOS)
         if: runner.os == 'macOS'
         run: |
           brew update
-          brew install cmake boost
+          brew install boost
 
       - name: Install deps (Windows)
         if: runner.os == 'Windows'
         shell: pwsh
         run: |
-          choco install -y cmake --installargs 'ADD_CMAKE_TO_PATH=System' --no-progress
           choco install -y boost --no-progress
           # Help CMake find Boost
           $b = Get-ChildItem 'C:\local' -Directory -Filter 'boost_*' | Sort-Object Name -Descending | Select-Object -First 1
@@ -66,3 +65,8 @@ jobs:
       # ---------- test ----------
       - name: Test
         run: ctest --test-dir build -C Release --output-on-failure
+
+      # ---------- python ----------
+      - name: Setup Python
+        uses: actions/setup-python@v4
+      - run: python -c "import this"
