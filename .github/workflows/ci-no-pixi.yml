@@ -41,7 +41,7 @@ jobs:
       # ---------- configure ----------
       - name: Configure (Linux/macOS)
         if: runner.os != 'Windows'
-        run: cmake -S . -B build
+        run: cmake -B build -DCMAKE_BUILD_TYPE=Release
 
       - name: Configure (Windows, MSVC)
         if: runner.os == 'Windows'
@@ -50,38 +50,19 @@ jobs:
           $cmakeArgs = @(
             "-S", ".", "-B", "build",
             "-G", "Visual Studio 17 2022",
+            "-DCMAKE_BUILD_TYPE=Release",
           )
           cmake @cmakeArgs
 
       # ---------- build ----------
       - name: Build (Linux/macOS)
         if: runner.os != 'Windows'
-        run: cmake --build build
+        run: cmake --build build --config Release
 
       - name: Build (Windows)
         if: runner.os == 'Windows'
-        run: cmake --build build
+        run: cmake --build build --config Release
 
       # ---------- test ----------
       - name: Test
-        run: 
-
-
-# jobs:
-#   test-demo:
-#     runs-on: ${{ matrix.os }}
-#     strategy:
-#       matrix:
-#         os: [ubuntu-latest, windows-latest, macos-latest]
-    
-#     steps:
-#     - name: Checkout repository
-#       uses: actions/checkout@v5
-    
-#     - name: Setup Pixi
-#       uses: prefix-dev/setup-pixi@v0
-    
-#     - run: pixi run configure
-#     - run: pixi run build
-#     - run: pixi run test
-#     - run: pixi run py-test
+        run: ctest --test-dir build -C Release --output-on-failure

@@ -12,8 +12,8 @@ cmake = ">=4.1.1,<5"
 python = ">=3.13.7,<3.14"
 
 [tasks]
-configure = "cmake -B build"
-build = { cmd = "cmake --build build", depends-on = ["configure"]}
-test = { cmd = "build/cppcon", depends-on = ["build"] }
+configure = "cmake -B build -DCMAKE_BUILD_TYPE=Release"
+build = { cmd = "cmake --build build --config Release", depends-on = ["configure"]}
+test = { cmd = "ctest --test-dir build -C Release", depends-on = ["build"] }
 
 py-test = 'python -c "import subprocess; subprocess.run([\"build/cppcon\"])"'
