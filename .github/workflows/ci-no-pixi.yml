@@ -32,7 +32,7 @@ jobs:
         if: runner.os == 'Windows'
         shell: pwsh
         run: |
-          choco install -y boost --no-progress
+          choco install boost-msvc-14.3 --no-progress -y
 
       # ---------- configure ----------
       - name: Configure (Linux/macOS)
