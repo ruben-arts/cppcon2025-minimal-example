@@ -33,9 +33,6 @@ jobs:
         shell: pwsh
         run: |
           choco install -y boost --no-progress
-          # Help CMake find Boost
-          $b = Get-ChildItem 'C:\local' -Directory -Filter 'boost_*' | Sort-Object Name -Descending | Select-Object -First 1
-          if ($b) { "BOOST_ROOT=$($b.FullName)" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append }
 
       # ---------- configure ----------
       - name: Configure (Linux/macOS)
