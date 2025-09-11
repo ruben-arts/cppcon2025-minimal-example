@@ -1,0 +1,24 @@
+name: CI
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+
+jobs:
+  test-demo:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v5
+    
+    - name: Setup Pixi
+      uses: prefix-dev/setup-pixi@v0
+    
+    - run: pixi run configure
+    - run: pixi run build
+    - run: pixi run test
+    - run: pixi run py-test
