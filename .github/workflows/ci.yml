@@ -1,11 +1,12 @@
-name: CI
+name: CI with Pixi
 on:
   push:
     branches: [ main ]
   pull_request:
 
 jobs:
-  test-demo:
+  test-pixi:
+    name: Pixi on ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -18,7 +19,5 @@ jobs:
     - name: Setup Pixi
       uses: prefix-dev/setup-pixi@v0
     
-    - run: pixi run configure
-    - run: pixi run build
     - run: pixi run test
     - run: pixi run py-test

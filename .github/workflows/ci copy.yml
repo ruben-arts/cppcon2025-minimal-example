@@ -1,0 +1,87 @@
+name: CI without Pixi
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    name: No-Pixi on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      # ---------- deps ----------
+      - name: Install deps (Linux)
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential cmake libboost-all-dev
+
+      - name: Install deps (macOS)
+        if: runner.os == 'macOS'
+        run: |
+          brew update
+          brew install cmake boost
+
+      - name: Install deps (Windows)
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          choco install -y cmake --installargs 'ADD_CMAKE_TO_PATH=System' --no-progress
+          choco install -y boost --no-progress
+          # Help CMake find Boost
+          $b = Get-ChildItem 'C:\local' -Directory -Filter 'boost_*' | Sort-Object Name -Descending | Select-Object -First 1
+          if ($b) { "BOOST_ROOT=$($b.FullName)" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append }
+
+      # ---------- configure ----------
+      - name: Configure (Linux/macOS)
+        if: runner.os != 'Windows'
+        run: cmake -S . -B build
+
+      - name: Configure (Windows, MSVC)
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          $cmakeArgs = @(
+            "-S", ".", "-B", "build",
+            "-G", "Visual Studio 17 2022",
+          )
+          cmake @cmakeArgs
+
+      # ---------- build ----------
+      - name: Build (Linux/macOS)
+        if: runner.os != 'Windows'
+        run: cmake --build build
+
+      - name: Build (Windows)
+        if: runner.os == 'Windows'
+        run: cmake --build build
+
+      # ---------- test ----------
+      - name: Test
+        run: 
+
+
+# jobs:
+#   test-demo:
+#     runs-on: ${{ matrix.os }}
+#     strategy:
+#       matrix:
+#         os: [ubuntu-latest, windows-latest, macos-latest]
+    
+#     steps:
+#     - name: Checkout repository
+#       uses: actions/checkout@v5
+    
+#     - name: Setup Pixi
+#       uses: prefix-dev/setup-pixi@v0
+    
+#     - run: pixi run configure
+#     - run: pixi run build
+#     - run: pixi run test
+#     - run: pixi run py-test
