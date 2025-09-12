@@ -9,6 +9,8 @@ find_package(Boost REQUIRED)
 add_executable(cppcon main.cpp)
 target_link_libraries(cppcon PRIVATE Boost::headers)
 
+install(TARGETS cppcon DESTINATION bin)
+
 # Testing
 enable_testing()
 add_test(NAME run COMMAND cppcon)

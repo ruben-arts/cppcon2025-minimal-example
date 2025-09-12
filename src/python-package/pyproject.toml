@@ -1,0 +1,22 @@
+[project]
+name = "python-package"
+version = "0.1.0"
+requires-python = ">=3.12"
+scripts = { python-script = "python_package.main:main" } 
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+# # Pixi configuration
+[tool.pixi.package.build.backend] 
+name = "pixi-build-python"
+version = "*" 
+channels = ["https://prefix.dev/pixi-build-backends", "https://prefix.dev/conda-forge"]
+
+[tool.pixi.package.host-dependencies] 
+hatchling = "==1.26.3"
+cpp-package = { path = "../cpp-package" }
+
+[tool.pixi.package.run-dependencies]
+rich = ">=13.3.1,<14"

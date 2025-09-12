@@ -19,5 +19,5 @@ jobs:
     - name: Setup Pixi
       uses: prefix-dev/setup-pixi@v0
     
-    - run: pixi run test
-    - run: pixi run this
+    - run: pixi run cpp
+    - run: pixi run py
