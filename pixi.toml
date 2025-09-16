@@ -5,8 +5,8 @@ platforms = ["osx-arm64", "linux-64", "win-64"]
 [dependencies]
 # C++ dependencies
 cxx-compiler = ">=1.11.0,<2"
-boost-cpp = ">=1.85.0,<2"
 cmake = ">=4.1.1,<5"
+libboost-devel = ">=1.89.0,<2"
 
 # Python dependency
 python = ">=3.13.7,<3.14"
