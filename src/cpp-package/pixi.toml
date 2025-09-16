@@ -11,4 +11,4 @@ channels = ["https://prefix.dev/pixi-build-backends", "https://prefix.dev/conda-
 extra-args = ["-DCMAKE_BUILD_TYPE=Release"] 
 
 [package.host-dependencies]
-boost-cpp = ">=1.85.0,<2"
+libboost-devel = ">=1.85.0,<2"
