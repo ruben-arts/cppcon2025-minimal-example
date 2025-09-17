@@ -8,7 +8,7 @@ scripts = { python-script = "python_package.main:main" }
 requires = ["hatchling"]
 build-backend = "hatchling.build"
 
-# # Pixi configuration
+# Pixi configuration
 [tool.pixi.package.build.backend] 
 name = "pixi-build-python"
 version = "*" 
