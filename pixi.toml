@@ -4,11 +4,13 @@ platforms = ["osx-arm64", "linux-64", "win-64"]
 
 [dependencies]
 # C++ dependencies
+# Command: pixi add cxx-compiler cmake libboost-devel
 cxx-compiler = ">=1.11.0,<2"
 cmake = ">=4.1.1,<5"
 libboost-devel = ">=1.89.0,<2"
 
 # Python dependency
+# Command: pixi add python
 python = ">=3.13.7,<3.14"
 
 [tasks]
