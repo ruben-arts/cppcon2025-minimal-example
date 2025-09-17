@@ -1,5 +1,5 @@
 [workspace]
-channels = ["conda-forge"]
+channels = ["https://prefix.dev/conda-forge"]
 platforms = ["osx-arm64", "linux-64", "win-64"]
 
 [dependencies]
@@ -12,8 +12,10 @@ libboost-devel = ">=1.89.0,<2"
 python = ">=3.13.7,<3.14"
 
 [tasks]
+# C++ tasks
 configure = "cmake -B build -DCMAKE_BUILD_TYPE=Release"
 build = { cmd = "cmake --build build --config Release", depends-on = ["configure"]}
 test = { cmd = "ctest --test-dir build -C Release", depends-on = ["build"] }
 
+# Python task
 this = "python -c 'import this'"
