@@ -4,6 +4,7 @@
 
 # build artifacts
 build
+*.conda
 
 # Python artifacts
 __pycache__/

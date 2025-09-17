@@ -715,7 +715,7 @@ packages:
   - python >=3.12
   - python *
   input:
-    hash: 1d4c40b4ea8c98835861778f4a2ab38cc4398afa40ba62ca6c2f61055433dce7
+    hash: 4aa51592cdac1daad0f972d6f93a9cb7e1e9d1132e702c873f579e30ce5a43aa
     globs:
     - pyproject.toml
 - conda: https://prefix.dev/conda-forge/noarch/python_abi-3.13-8_cp313.conda
