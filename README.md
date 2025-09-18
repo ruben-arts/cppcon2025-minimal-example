@@ -10,7 +10,7 @@ https://docs.google.com/presentation/d/1WPbmhisuLrAJFT6x11dyYG5dL4rsn4WbwN_-Ykeg
 ## Highlights
 
 - Configured with **CMake**
-- CI setup with **GitHub Actions**
+- CI setup with [**GitHub Actions**](https://github.com/ruben-arts/cppcon2025-minimal-example/actions/runs/17835832649)
 - Locked dependencies for reproducibility for **Windows**, **macOS**, and **Linux**
 - Easy setup and usage with **Pixi** ([Learn more about Pixi](https://pixi.sh))
 - The `pixi-build` workflow has been implemented in the [`source`](https://github.com/ruben-arts/cppcon2025-minimal-example/tree/source) branch of this repository.
